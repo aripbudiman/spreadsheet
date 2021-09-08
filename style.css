@@ -110,20 +110,28 @@ section {
 
 .form button[type="submit"],
 .form button[type="button"] {
-    background: rgba(255, 255, 255, 0.274);
+    background: #28e4fd;
     border: none;
     outline: none;
     padding: 10px 20px;
     border-radius: 20px;
     font-size: 16px;
     letter-spacing: 1px;
-    color: #595959;
+    color: white;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     font-weight: 600;
     max-width: 100px;
     cursor: pointer;
     margin-bottom: 20px;
     margin-top: 20px;
+}
+
+.form button:hover {
+    background: #f65f9c;
+}
+
+.form button:active {
+    background: #49e2a5;
 }
 
 .form .inputBox select option {
