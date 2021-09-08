@@ -1,0 +1,183 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <title>Cashflow</title>
+</head>
+
+<body>
+  <section>
+    <div class="color"></div>
+    <div class="color"></div>
+    <div class="color"></div>
+    <div class="box">
+      <div class="container">
+        <div class="form">
+          <div class="menu-circle"></div>
+          <h2>Input Cashflow KBB</h2>
+          <div class="alert alert-dismissible fade show d-none my-alert" role="alert">
+            <strong>Berhasil!</strong> Hore......
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          <form action="" name="cashflow-kbb">
+            <div class="inputBox">
+              <label for="">Nama Petugas</label>
+              <select name="petugas" id="">
+                <option value="Sulaeman Afif">Sulaeman Afif</option>
+                <option value="Bani Nuzul Ramdhan">Bani Nuzul Ramdhan</option>
+                <option value="Beni Iskandar">Beni Iskandar</option>
+                <option value="Erni Lathifah">Erni Lathifah</option>
+                <option value="Hendri Herdiansyah S">Hendri Herdiansyah S</option>
+                <option value="Mohamad Saeful Ramdan">Mohamad Saeful Ramdan</option>
+                <option value="Rian Andriani Aziz">Rian Andriani Aziz</option>
+                <option value="Tendi Agus Maulana">Tendi Agus Maulana</option>
+              </select>
+            </div>
+            <div class="inputBox">
+              <label for="">Hari Pelayanan</label>
+              <select name="hpelayanan" id="">
+                <option value="Senin">Senin</option>
+                <option value="Selasa">Selasa</option>
+                <option value="Rabu">Rabu</option>
+                <option value="Kamis">Kamis</option>
+              </select>
+            </div>
+            <div class="inputBox">
+              <label for="">Tanggal Pelayanan</label>
+              <input type="date" name="tpelayanan" placeholder="Tanggal Pelayanan">
+            </div>
+            <div class="inputBox1">
+              <label for="">Nama Kelompok</label>
+              <input type="text" name="nmajelis" required>
+            </div>
+            <div class="inputBox">
+              <label for="">Modal Kas Awal</label>
+              <input type="text" name="mkasawal" value="0" oninput="hitungSaldo()">
+            </div>
+            <div class="inputBox">
+              <label for="">Angsuran Ikhtiar</label>
+              <input type="text" name="angikhtiar" value="0" id="rupiah" oninput="hitungTotal()">
+            </div>
+            <div class="inputBox">
+              <label for="">Angsuran Individu</label>
+              <input type="text" name="angindividu" value="0" oninput="hitungTotal()">
+            </div>
+            <div class="inputBox">
+              <label for="">Total Angsuran</label>
+              <input type="text" name="tangsuran" value="0" id="tangsuran" readonly oninput="hitungSaldo()">
+            </div>
+            <div class="inputBox">
+              <label for="">Tabungan Sukaela</label>
+              <input type="text" name="tsukarela" value="0" oninput="hitungSaldo()">
+            </div>
+            <div class="inputBox">
+              <label for="">Tabungan Berencana</label>
+              <input type="text" name="tberencana" value="0" oninput="hitungSaldo()">
+            </div>
+            <div class="inputBox">
+              <label for="">Simpanan Wajib</label>
+              <input type="text" name="swajib" value="0" oninput="hitungSaldo()">
+            </div>
+            <div class="inputBox">
+              <label for="">Infaq</label>
+              <input type="text" name="infaq" value="0" oninput="hitungSaldo()">
+            </div>
+            <div class="inputBox">
+              <label for="">Kartu Angsuran / reg Taber</label>
+              <input type="text" name="ka" value="0" oninput="hitungSaldo() ;hitungKartu()">
+            </div>
+            <div class="inputBox">
+              <label for="">Buku Tabungan</label>
+              <input type="text" name="bt" value="0" oninput="hitungSaldo()">
+            </div>
+            <div class="inputBox">
+              <label for="">Tambal Sulam</label>
+              <input type="text" name="tsulamrp" value="0" oninput="hitungSaldo(); tambalSulam()">
+            </div>
+            <div class="inputBox">
+              <label for="">Biaya Admin</label>
+              <input type="text" name="adm" value="0" class="" oninput="hitungAdmin()">
+            </div>
+            <div class="inputBox">
+              <label for="">Dana Kegiatan</label>
+              <input type="text" name="kegiatan" value="0" class="" oninput="hitungAdmin()">
+            </div>
+            <div class="inputBox">
+              <label for="">Total Admin</label>
+              <input type="text" name="tadm" value="0" class="" readonly oninput="hitungSaldo()">
+            </div>
+            <div class="inputBox">
+              <label for="">Asuransi</label>
+              <input type="text" name="asuransi" value="0" oninput="hitungSaldo()">
+            </div>
+            <div class="inputBox">
+              <label for="">Droping Rupiah</label>
+              <input type="text" name="dropingrp" value="0" oninput="hitungSaldo()">
+            </div>
+            <div class="inputBox">
+              <label for="">Droping Portofolio</label>
+              <input type="text" name="dropingpf" value="0">
+            </div>
+            <div class="inputBox">
+              <label for="">Penarikan Tabungan Sukarela</label>
+              <input type="text" name="pensukarela" value="0" oninput="hitungSaldo()">
+            </div>
+            <div class="inputBox">
+              <label for="">Pencairan Tabungan Berencana</label>
+              <input type="text" name="penberencana" value="0" oninput="hitungSaldo()">
+            </div>
+            <div class="inputBox">
+              <label for="">Pencairan Pengunduran Diri</label>
+              <input type="text" name="pengundurandiri" value="0" oninput="hitungSaldo()">
+            </div>
+            <div class="inputBox">
+              <label for="">Saldo</label>
+              <input type="text" name="saldo">
+            </div>
+            <div class="inputBox">
+              <label for="">Anggota Keluar (PF)</label>
+              <input type="text" name="akpf">
+            </div>
+            <div class="inputBox">
+              <label for="">Tambal Sulam (PF)</label>
+              <input type="text" name="tspf" readonly>
+            </div>
+            <div class="inputBox">
+              <label for="">Registrasi Taber (PF)</label>
+              <input type="text" name="rtpf" readonly>
+            </div>
+            <div class="inputBox">
+              <label for="">Minggu Ke</label>
+              <textarea name="keterangan"></textarea>
+            </div>
+            <!-- <div class="inputBox">
+                  <input type="submit" value="Simpan" class="btn-kirim">
+                </div> -->
+            <div>
+              <button class="btn-kirim" type="submit">Simpan</button>
+              <button class="btn-loading d-none" type="button" disabled>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script src="script.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="autoNumeric.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+  </script>
+  <script>
+  </script>
+</body>
+
+</html>
