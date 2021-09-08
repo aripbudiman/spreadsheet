@@ -29,9 +29,10 @@
 function hitungTotal(){
     var ikhtiar = $('input[name="angikhtiar"]').val();
     var individu = $('input[name="angindividu"]').val();
-    var jumlah = Number(ikhtiar) + Number(individu);
+    // Pisah dulu dan satukan kembali valuenya karena ada titiknya (2.000 menjadi 2000)
+    var jumlah = Number(ikhtiar.split(".").join("")) + Number(individu.split(".").join(""));
     if(!isNaN(jumlah)){
-        $('input[name="tangsuran"]').val(jumlah);
+        $('input[name="tangsuran"]').val(formatRupiah(jumlah.toString()));
     }else{
         $('input[name="tangsuran"]').val(0);
     }
@@ -40,9 +41,10 @@ function hitungTotal(){
 function hitungAdmin(){
     var biayaAdmin = $('input[name="adm"]').val();
     var danaKegiatan = $('input[name="kegiatan"]').val();
-    var total = Number(biayaAdmin) + Number(danaKegiatan);
+    // Pisah dulu dan satukan kembali valuenya karena ada titiknya (2.000 menjadi 2000)
+    var total = Number(biayaAdmin.split(".").join("")) + Number(danaKegiatan.split(".").join(""));
     if(!isNaN(total)){
-        $('input[name="tadm"]').val(total);
+        $('input[name="tadm"]').val(formatRupiah(total.toString()));
     }else{
         $('input[name="tadm"]').val(0);
     }
@@ -67,14 +69,34 @@ function hitungSaldo(){
     var tabunganSukarelaOut = $('input[name="pensukarela"]').val();
     var tabunganBerencanaOut = $('input[name="penberencana"]').val();
     var pengunduranDiriRp = $('input[name="pengundurandiri"]').val();
-    var saldo = Number(kasAwal) + Number(totalAngsuran) + Number(tabunganSukarelaIn) + 
-    Number(tabunganBerencanaIn) + Number(simpananWajib) + Number(infaq) + Number(kartuAngsuran) + 
-    Number(bukuTabungan) + Number(tambalSulam) + Number(totalAdmin) + Number(asuransi) - Number(dropingRp) - 
-    Number(tabunganSukarelaOut) - Number(tabunganBerencanaOut) - Number(pengunduranDiriRp);
+    
+    // Sekedar tambahan logika untuk menggantian variabel saldo sebelumnya (sudah dikomentari dibawah ini)
+    // var saldo = Number(kasAwal) + Number(totalAngsuran) + Number(tabunganSukarelaIn) + 
+    // Number(tabunganBerencanaIn) + Number(simpananWajib) + Number(infaq) + Number(kartuAngsuran) + 
+    // Number(bukuTabungan) + Number(tambalSulam) + Number(totalAdmin) + Number(asuransi) - Number(dropingRp) - 
+    // Number(tabunganSukarelaOut) - Number(tabunganBerencanaOut) - Number(pengunduranDiriRp);
+
+    // Ambil semua elemen, satukan jadi sebuah array
+    let arrSaldo = [kasAwal, totalAngsuran, tabunganSukarelaIn, tabunganBerencanaIn, simpananWajib, infaq, kartuAngsuran, bukuTabungan, tambalSulam, totalAdmin, asuransi, dropingRp, tabunganSukarelaOut, tabunganBerencanaOut, pengunduranDiriRp];
+
+    // Bikin variabel saldo utk hasil akhir saldonya
+    let saldo = 0;
+
+    // Lakukan looping ke tiap2 elemen dari array yg diatas tadi
+    arrSaldo.forEach(function(elemen, index) {
+        // Jika index dari elemennya adalah nomor 11 keatas, lakukan pengurangan dari elemen2nya terhadap saldonya.
+        if (index > 10) {
+            saldo -= Number(elemen.split(".").join(""));
+        // Jika index dari elemennya adalah selain nomor 11 keatas, lakukan penjumlahan dari elemen2nya terhadap saldonya.
+        } else {
+            saldo += Number(elemen.split(".").join(""));
+        }
+    });
+
     if(!isNaN(saldo)){
-        $('input[name="saldo"]').val(saldo);
+        $('input[name="saldo"]').val(formatRupiah(saldo.toString()));
     }else{
-        $('input[name="saldo"]').val(0);
+        $('input[name="saldo"]').val("0");
     }
 
 }
